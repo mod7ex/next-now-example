@@ -1,6 +1,6 @@
 import styles from "~/styles/modules/cell.module.scss";
 import { memo, useEffect, useRef } from "react";
-import { TYPES } from "~/constants";
+import { TYPES, DURATION } from "~/constants";
 
 interface Props {
   value: number;
@@ -19,11 +19,13 @@ const Cell: React.FC<Props> = ({ value, type }) => {
 
     topEL.classList.add(styles["top-front-animate"]);
     bottomEl.classList.add(styles["bottom-front-animate"]);
+    bottomEl.dataset.value = `${previous}`;
 
     const timer = setTimeout(() => {
       topEL.classList.remove(styles["top-front-animate"]);
       bottomEl.classList.remove(styles["bottom-front-animate"]);
-    }, 950);
+      bottomEl.dataset.value = `${value}`;
+    }, DURATION - 100);
 
     return () => clearTimeout(timer);
   });
@@ -36,7 +38,7 @@ const Cell: React.FC<Props> = ({ value, type }) => {
       <p ref={frontTopRef} className={`${styles.front} ${styles.top}`}>
         {value}
       </p>
-      <p ref={frontBottomRef} className={`${styles.front} ${styles.bottom}`} data-value={value}></p>
+      <p ref={frontBottomRef} className={`${styles.front} ${styles.bottom}`}></p>
     </div>
   );
 };

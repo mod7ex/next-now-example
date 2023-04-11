@@ -3,3 +3,5 @@ export enum TYPES {
   SECONDS = 60,
   MINUTES = 60,
 }
+
+export const DURATION = 1000;

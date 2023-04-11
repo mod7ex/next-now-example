@@ -1,3 +1,5 @@
+import { DURATION } from "~/constants";
+
 class Store {
   private _subscribers = new Set<Fn>();
   private _now = {
@@ -35,7 +37,7 @@ class Store {
         .then(({ now }) => {
           this.set(now);
         });
-    }, 1000);
+    }, DURATION);
 
     return () => clearInterval(timer);
   }
