@@ -1,0 +1,28 @@
+@mixin edges($top: 0, $bottom: 0, $left: 0, $right: 0, $abs: true) {
+  top: $top;
+  bottom: $bottom;
+  left: $left;
+  right: $right;
+
+  @if $abs {
+    position: absolute;
+  }
+
+  @content;
+}
+
+/**************** Flexbox ****************/
+
+/* prettier-ignore */
+@mixin flex($direction: row, $align: center, $justify: center, $gap: 0, $wrap: nowrap) {
+    display: flex;
+    gap: $gap;
+    flex-direction: $direction;
+    justify-content: $justify;
+    // justify-items: $justify;
+    align-items: $align;
+    flex-wrap: $wrap;
+    @content;
+ }
+
+/**************** Box Shadow ****************/

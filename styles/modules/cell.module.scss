@@ -1,0 +1,81 @@
+$clockCountHeight: 200px;
+$cell_color: white;
+$duration: 900ms;
+
+@keyframes flip-up {
+  from {
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+  to {
+    transform: rotate3d(1, 0, 0, 180deg);
+  }
+}
+
+@keyframes flip-up-back {
+  from {
+    transform: rotate3d(-1, 0, 0, 180deg);
+  }
+  to {
+    transform: rotate3d(0, 0, 0, 0deg);
+  }
+}
+
+.bottom-front-animate {
+  animation-name: flip-up;
+  animation-duration: $duration;
+}
+
+.top-front-animate {
+  animation-name: flip-up-back;
+  animation-duration: $duration;
+}
+
+.gradient-white-gray {
+  background: linear-gradient(to bottom, $cell_color 0%, rgb(215, 215, 215) 100%);
+}
+
+.cell {
+  width: $clockCountHeight;
+  height: $clockCountHeight;
+  position: relative;
+  background-color: $cell_color;
+  border-radius: $radius;
+  perspective: 1000px;
+  @include flex;
+
+  & > p {
+    font-size: 6rem;
+    text-align: center;
+    overflow: hidden;
+    backface-visibility: hidden;
+    animation-fill-mode: forwards;
+    @include edges;
+
+    &::after {
+      content: attr(data-value);
+    }
+  }
+
+  .top {
+    bottom: 50%;
+    line-height: $clockCountHeight;
+    background-color: $cell_color;
+    border-top-left-radius: $radius;
+    border-top-right-radius: $radius;
+    transform-origin: center bottom;
+    @extend .gradient-white-gray;
+  }
+
+  .bottom {
+    top: 50%;
+    line-height: 0px;
+    background: $cell_color;
+    border-bottom-left-radius: $radius;
+    border-bottom-right-radius: $radius;
+    transform-origin: center top;
+  }
+
+  .front {
+    z-index: 1;
+  }
+}
